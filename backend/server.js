@@ -11,6 +11,7 @@ if (process.env.NODE_ENV !== "production") {
 // Internal module imports
 // Routes (Controllers)
 const indexRouter = require("./routes/index.js");
+const reviewsRouter = require("./routes/reviews.js");
 
 // Creating the express server
 const app = express();
@@ -29,7 +30,10 @@ app.set("views", __dirname + "/views");
 app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 app.use(express.static("public"));
+
+// Routes
 app.use("/", indexRouter);
+app.use("/reviews", reviewsRouter);
 
 
 app.listen(process.env.PORT || 3000);
