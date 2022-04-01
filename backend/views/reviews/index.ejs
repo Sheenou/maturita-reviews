@@ -1,7 +1,11 @@
 <h2>Výpis posudků</h2>
 <form action="/reviews" method="get">
     <input type="text" name="title" id="title">
-    <button type="submit" value="<%= searchOptions.title %>">Vyhledat</button>
+    <button type="submit" value="
+    <% if (locals.searchOptions != null) { %>
+        <%= searchOptions.title %>
+    <% } %>
+    ">Vyhledat</button>
 </form>
 <% reviews.forEach(review => { %>
     <div>
