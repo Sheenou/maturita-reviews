@@ -6,8 +6,9 @@ router.get("/", async (req, res) => {
     let searchOptions = {};
 
     if (req.query.title != null && req.query.title !== "") {
-        searchOptions.title = new RegExp(req.query.query, "i");
+        searchOptions.title = new RegExp(req.query.title, "i");
     }
+    searchOptions.public = true;
 
     try {
         const reviews = await Review.find(searchOptions);
@@ -30,6 +31,7 @@ router.post("/", async (req, res) => {
     const review = new Review({
         title: req.body.title,
         type: req.body.type,
+        public: req.body.public,
         student: {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
