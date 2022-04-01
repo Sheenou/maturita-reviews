@@ -3,9 +3,18 @@ const router = require("express").Router();
 
 // Get all reviews
 router.get("/", async (req, res) => {
+    let searchOptions = {};
+
+    if (req.query.title != null && req.query.title !== "") {
+        searchOptions.title = new RegExp(req.query.query, "i");
+    }
+
     try {
-        const reviews = await Review.find({});
-        res.render("reviews/index", { reviews: reviews });
+        const reviews = await Review.find(searchOptions);
+        res.render("reviews/index", { 
+            reviews: reviews,
+            searchOptions: req.query.title
+        });
     } catch (error) {
         res.redirect("/");
     }
