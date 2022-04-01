@@ -2,6 +2,7 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 // Get env variables if running in dev
 if (process.env.NODE_ENV !== "production") {
@@ -30,6 +31,7 @@ app.set("views", __dirname + "/views");
 app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
 
 // Routes
 app.use("/", indexRouter);

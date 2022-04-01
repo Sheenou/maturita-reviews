@@ -1,1 +1,10 @@
-All reviews
+<h2>Výpis posudků</h2>
+<form action="/reviews" method="get">
+    <input type="text" name="query" id="query">
+    <button type="submit">Vyhledat</button>
+</form>
+<% reviews.forEach(review => { %>
+    <div>
+        <%= review.title %>
+    </div>
+<% }) %>

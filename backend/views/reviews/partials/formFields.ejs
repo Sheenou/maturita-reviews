@@ -1,0 +1,118 @@
+<!-- <div>
+    <label for="schoolName">Název školy</label>
+    <input type="text" name="schoolName" id="schoolName" value="Střední průmyslová škola Brno, Purkyňova, příspěvková organizace" size="75" autocomplete="off" required>
+</div>
+
+<div>
+    <label for="schoolYear">Školní rok</label>
+    <input type="text" name="schoolYear" id="schoolYear" value="2021/2022" pattern="^[\d]{4}\/[\d]{4}$" autocomplete="off" required>
+</div> -->
+
+<div>
+    <label for="firstName">Jméno žáka</label>
+    <input type="text" name="firstName" id="firstName" pattern="^[A-ZŠČŘŽÁÍÝÉĚÚŮŇ][a-zščřžáíýéěúůň]+$" autocomplete="off" value="<%= review.student.firstName %>" required> 
+</div>
+
+<div>
+    <label for="lastName">Příjmení žáka</label>
+    <input type="text" name="lastName" id="lastName"  pattern="^[A-ZŠČŘŽÁÍÝÉĚÚŮŇ][a-zščřžáíýéěúůň]+$" autocomplete="off" value="<%= review.student.lastName %>" required> 
+</div>
+
+<!-- TODO AJAX for getting avaiable classes -->
+<div>
+    <label for="class">Třída žáka</label>
+    <select name="class" id="class" required value="<%= review.student.class %>">
+        <option value="V4A">V4A</option>
+        <option value="V4B">V4B</option>
+        <option value="V4C">V4C</option>
+        <option value="V4D">V4D</option>
+    </select> 
+</div>
+
+<!-- TODO AJAX -->
+<div>
+    <label for="type">Číslo zadání</label>
+    <input type="text" name="type" id="type" autocomplete="off" value="<%= review.type %>" required> 
+</div>
+
+<div>
+    <label for="title">Název práce</label>
+    <input type="text" name="title" id="type" autocomplete="off" value="<%= review.title %>" required> 
+</div>
+
+<div>
+    <label for="compliance">Splnění jednotlivých bodů zadání</label>
+    <input type="text" name="compliance" id="compliance" list="cl0" size="75" autocomplete="off" value="<%= review.criteria.compliance %>" required> 
+</div>
+
+<div>
+    <label for="suitability">Vhodnost použitého řešení</label>
+    <input type="text" name="suitability" id="suitability" list="cl1" size="75" autocomplete="off" value="<%= review.criteria.suitability %>" required> 
+</div>
+
+<div>
+    <label for="functionality">Funkčnost zařízení, aplikace</label>
+    <input type="text" name="functionality" id="functionality" size="75" autocomplete="off" value="<%= review.criteria.functionality %>" required> 
+</div>
+
+<div>
+    <label for="typography">Typografická a jazyková úprava práce</label>
+    <input type="text" name="typography" id="typography" list="cl2" size="75" autocomplete="off" value=" <%= review.criteria.typography %>" required>
+</div>
+
+<div>
+    <label for="evaluation">Celkové hodnocení</label>
+    <input type="text" name="evaluation" id="evaluation" size="75" autocomplete="off" value="<%= review.criteria.evaluation %>" required> 
+</div>
+
+<div>
+    <label for="questions">Otázky oponenta</label>
+    <input type="text" name="questions" id="questions" size="75" autocomplete="off" value="<%= review.criteria.questions %>" required> 
+</div>
+
+<div>
+    <label for="grade">Navrhovaná známka</label>
+    <select name="grade" id="grade" value="<%= review.criteria.grade %>">
+        <option value="1">Výborně</option>
+        <option value="2">Chvalitebně</option>
+        <option value="3">Dobře</option>
+        <option value="4">Dostatečně</option>
+        <option value="5">Nedostatečně</option>
+    </select> 
+</div>
+
+<div>
+    <input type="radio" name="public" id="publicTrue" value="true">
+    <label for="publicTrue">Veřejné</label>
+
+    <input type="radio" name="public" id="publicFalse" value="false">
+    <label for="publicFalse">Soukromé</label>
+</div> <%= review.public %>
+
+<!-- TODO replace with user specific and global DB -->
+<datalist id="cl0">
+    <option value="Žák splnil všechny body zadání."></option>
+    <option value="Žák splnil téměř všechny body zadání."></option>
+    <option value="Žák splnil většinu bodů zadání."></option>
+    <option value="Žák splnil méně než polovinu bodů zadání."></option>
+    <option value="Žák nesplnil téměř žádné body zadání."></option>
+    <option value="Žák nesplnil žádné body zadání."></option>
+</datalist>
+
+<datalist id="cl1">
+    <option value="Žák volil metody a postupy odpovídající zadání."></option>
+    <option value="Žák volil metody a postupy převážně odpovídající zadání."></option>
+    <option value="Žák volil metody a postupy částečně odpovídající zadání."></option> 
+    <option value="Žák volil metody a postupy téměř neodpovídající zadání."></option>
+    <option value="Žák volil metody a postupy neodpovídající zadání."></option>
+</datalist>
+
+<datalist id="cl2">
+    <option value="Teoretická část práce je po všech stránkách na velmi vysoké úrovni."></option>
+    <option value="Teoretická část práce je po všech stránkách na vysoké úrovni."></option>
+    <option value="Teoretická část práce je po všech stránkách na průměrné úrovni."></option>
+    <option value="Teoretická část práce je po všech stránkách na nízké úrovni."></option>
+    <option value="Teoretická část práce je po všech stránkách na velmi nízké úrovni."></option>
+</datalist>
+
+<div id="error" class="error"></div>
