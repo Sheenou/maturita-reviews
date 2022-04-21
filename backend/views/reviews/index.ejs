@@ -7,8 +7,15 @@
     <% } %>
     ">Vyhledat</button>
 </form>
-<% reviews.forEach(review => { %>
-    <div>
-        <%= review.title %>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-3">
+        <% reviews.forEach(review => { %>
+            <a href="/reviews/<%= review.id %>" class="col">
+                <div>
+                    <%= review.title %>
+                </div>
+            </a>
+        <% }) %>
     </div>
-<% }) %>
+</div>

@@ -1,0 +1,17 @@
+<form method="POST" action="/users/register">
+    <h2 class="h3 mb-3 fw-normal">Please sign up</h1>
+
+      <%- include("./partials/form_fields.ejs") %>
+
+    <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword2" name="repassword" placeholder="Heslo">
+        <label for="floatingPassword2">Potvrzení hesla</label>
+    </div>
+
+    <!-- <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div> -->
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Přihlásit se</button>
+</form>

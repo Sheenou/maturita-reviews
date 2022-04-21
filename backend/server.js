@@ -13,6 +13,7 @@ if (process.env.NODE_ENV !== "production") {
 // Routes (Controllers)
 const indexRouter = require("./routes/index.js");
 const reviewsRouter = require("./routes/reviews.js");
+const usersRouter = require("./routes/users.js");
 
 // Creating the express server
 const app = express();
@@ -36,6 +37,7 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
 // Routes
 app.use("/", indexRouter);
 app.use("/reviews", reviewsRouter);
+app.use("/users", usersRouter);
 
 
 app.listen(process.env.PORT || 3000);
