@@ -1,8 +1,20 @@
-<div class="form-floating">
-    <input type="email" class="form-control" id="floatingInput" name="email" placeholder="jmeno.prijmeni@purkynka.cz">
+<% if(!locals.userInfo) { %>
+  <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" name="email" placeholder="jmeno.prijmeni@purkynka.cz" required>
+      <label for="floatingInput">Email</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Heslo" required>
+      <label for="floatingPassword">Heslo</label>
+  </div>
+<% } else { %>
+  <div class="form-floating">
+    <input type="email" class="form-control" id="floatingInput" name="email" placeholder="jmeno.prijmeni@purkynka.cz" value="<%= userInfo.email %>" required>
     <label for="floatingInput">Email</label>
   </div>
-<div class="form-floating">
-    <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Heslo">
-    <label for="floatingPassword">Heslo</label>
 </div>
+<div class="form-floating">
+  <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Heslo" required>
+  <label for="floatingPassword">Heslo</label>
+</div>
+<% } %>

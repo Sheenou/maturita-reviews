@@ -1,13 +1,18 @@
 const Review = require("../models/Review.js");
+const pdf = require("html-pdf");
+const fs = require("fs");
+const path = require("path");
+// const download = require("download");
 
 class ReviewsController {
     static async getReviews(req, res) {
-        let searchOptions = {};
+        console.log(req.user);
+        let searchOptions = {
+        };
 
         if (req.query.title != null && req.query.title !== "") {
             searchOptions.title = new RegExp(req.query.title, "i");
         }
-        searchOptions.public = true;
 
         try {
             const reviews = await Review.find(searchOptions);
@@ -23,27 +28,40 @@ class ReviewsController {
     static async getReview(req, res) {
         try {
             const review = await Review.findById(req.params.reviewId);
-
             if (!review) throw new Error("Neexistuje posudek s tímto ID");
 
-            res.render("reviews/showReview", {
-                review: review
-            });
+            const html = fs.readFileSync(path.join(__dirname, "../views/reviews/pdfTemplate.ejs"));
+
+            const options = {
+                "format": "A4",
+                "orientation": "portrait"
+            };
+
+            const fileName = path.join(__dirname, `../public/temp/${review.id}`); 
+
+            res.render('reviews/pdfTemplate', { review: review }, function(err, html) {
+                pdf.create(html, options).toFile(fileName, function(err, result) {
+                    if (err) {
+                        throw err;
+                    } else {
+                        res.redirect("/reviews");
+                    }
+                });
+            });  
         } catch (error) {
-            console.log(error);
+            console.error(error);
             res.redirect("/reviews");
         }
     }
 
-    static createReview(req, res) {
+    static getReviewForm(req, res) {
         res.render("reviews/new", { review: new Review() })
     }
 
-    static async getReviewForm(req, res) {
+    static async createReview(req, res) {
         const review = new Review({
             title: req.body.title,
             type: req.body.type,
-            public: req.body.public,
             student: {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,

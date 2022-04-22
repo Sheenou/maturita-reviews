@@ -10,12 +10,14 @@
 
 <div class="container">
     <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-3 card-group">
-        <% reviews.forEach(review => { %>
-            <a href="/reviews/<%= review.id %>" class="card bg-light">
-                <div>
-                    <%= review.title %>
-                </div>
-            </a>
-        <% }) %>
+        <% if (locals.reviews != null) { %>
+            <% reviews.forEach(review => { %>
+                <a href="/reviews/<%= review.id %>" class="card bg-light">
+                    <div>
+                        <%= review.title %>
+                    </div>
+                </a>
+            <% }) %>
+        <% } %>
     </div>
 </div>

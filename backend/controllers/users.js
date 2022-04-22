@@ -1,6 +1,7 @@
 const UserLogin = require("../models/userlogin.js");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
+const jwt = require("jsonwebtoken");
 
 class UsersController {
     static async authenticateUser(req, res) {
@@ -12,18 +13,16 @@ class UsersController {
 
         try {
             const userLogin = await UserLogin.findOne(inputs);
-            console.log(userLogin);
 
+            if (userLogin == null) throw new Error("Tento email není registrován"); 
             if(!await bcrypt.compare(body.password, userLogin.password)) throw new Error("Nesprávné heslo");
-            if (!userLogin) throw new Error("Tento email není registrován"); 
-            
-            const token = jwt.sign({_id: userLogin._id}, process.env.TOKEN_SECRET);
-            console.log(token);
 
-            res.header("auth-token", token);
+ 
+            const token = jwt.sign({ _id: UserLogin._id }, process.env.TOKEN_SECRET);
 
-            res.render("index", {
-                userId: userLogin.id
+            res.render("reviews", {
+                userId: userLogin.id,
+                accessToken: token
             });
 
         } catch (error) {
@@ -58,7 +57,6 @@ class UsersController {
     
         try {
             const unique = UserLogin.findOne({email: userLogin.email});
-            console.log(unique);
 
             const {error} = validationSchema.validate(body);
 
@@ -78,9 +76,12 @@ class UsersController {
             userLogin.password = await bcrypt.hash(body.password, 10);
             await userLogin.save();
             // res.redirect(`reviews/${newReview.id}`);
-            res.redirect("/");
+            const token = jwt.sign({_id: userLogin._id}, process.env.TOKEN_SECRET);
+
+            res.accessToken =  token;
+            res.redirect("/reviews");
         } catch (err) {
-            res.render("users/register", {
+            res.render("/users/register", {
                 userLogin: userLogin,
                 errorMessage: err
             });
