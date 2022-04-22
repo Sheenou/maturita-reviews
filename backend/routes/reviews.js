@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const ReviewsController = require("../controllers/reviews.js");
+const verifyToken = require("../middleware/verifyToken.js");
 
 // Get all reviews
 router.get("/", ReviewsController.getReviews);

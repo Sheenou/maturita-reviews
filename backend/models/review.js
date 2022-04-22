@@ -11,11 +11,6 @@ const reviewSchema = new mongoose.Schema({
         required: true
     },
 
-    "public": {
-        type: Boolean,
-        default: false,
-    },
-
     "student" : {
         "firstName" : {
             type : String,

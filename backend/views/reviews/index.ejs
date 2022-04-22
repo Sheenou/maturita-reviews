@@ -9,9 +9,9 @@
 </form>
 
 <div class="container">
-    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-3">
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-3 card-group">
         <% reviews.forEach(review => { %>
-            <a href="/reviews/<%= review.id %>" class="col">
+            <a href="/reviews/<%= review.id %>" class="card bg-light">
                 <div>
                     <%= review.title %>
                 </div>

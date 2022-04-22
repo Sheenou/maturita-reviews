@@ -15,12 +15,10 @@ const userInfoSchema = new mongoose.Schema({
 
     titlesBeforeName: {
         type: String,
-        required: true,
     },
 
     titlesAfterName: {
         type: String,
-        required: true,
         max: 50
     }
 })

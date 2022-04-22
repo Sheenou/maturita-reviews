@@ -1,4 +1,149 @@
-<h2><%= review.title %></h2>
-<div>
-    <%= review %>
-</div>
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="/static/css/pdfTemplate.css"> -->
+    <style>
+        body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 30px;
+        }
+
+        h1 {
+        background-color: rgb(208, 206, 206);
+        font-size: 16px;
+        text-align: center;
+        font-weight: 700;
+        padding-bottom: 15px;
+        margin-bottom: 0%;
+        }
+
+        h2 {
+        margin: 0%;
+        text-align: center;
+        font-weight: 700;
+        }
+
+        h3 {
+        margin: 0%;
+        text-align: center;
+        font-weight: 700;
+        }
+
+        p {
+        font-size: 6;
+        margin: 5px;
+        }
+
+        span {
+        font-weight: 700;
+        }
+
+        table,
+        th,
+        td {
+        margin: 30px;
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 15px;
+        }
+
+        table {
+        text-align: left;
+        }
+
+        th {
+        font-weight: 700;
+        background-color: rgb(242, 242, 242);
+        }
+
+        #header {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        }
+
+        #oponent {
+        font-size: 14px;
+        font-weight: 500;
+        margin: 30px;
+        }
+
+        #mark {
+        font-weight: 700;
+        }
+
+        #left {
+        padding-right: 200px;
+        }
+
+        #right {
+        padding-right: 300px;
+        }
+
+        #date {
+        display: inline-block;
+        margin-right: 350px;
+        }
+
+        #signature {
+        display: inline-block;
+        text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1 id="header">Střední průmyslová škola Brno, Purkyňova, příspěvková organizace</h1>
+        <h2>MATURITNÍ PRÁCE</h2>
+        <h3>obhajovaná před zkušební komisí</h3>
+        <h2 id="oponent">Hodnocení maturitní práce – oponent maturitní práce</h2>
+        
+        <p>Školní rok: 2021/2022</p>
+        <p>ŠVP: Informatika</p>
+        <p>Předmět: Soubor odborných předmětů (zaměření na informační technologie)</p>
+        <p>Žák: <%= review.student.firstName + " " + review.student.lastName %></p>
+        <p>Třída: <%= review.student.class %></p>
+        <p>Vedoucí práce: učitel</p> <!-- TODO -->
+        <p>Číslo zadání a název práce: <%= review.type %>: <%= review.title %></p>
+
+        <table>
+            <tr>
+                <th id="left">Kritérium</th>
+                <th id="right">Hodnocení</th>
+            </tr>
+            <tr>
+                <td>Splnění jednotlivých bodů zadání</td>
+                <td><%= review.criteria.compliance %></td>
+            </tr>
+            <tr>
+                <td>Vhodnost použitého řešení</td>
+                <td><%= review.criteria.suitability %></td>
+            </tr>
+            <tr>
+                <td>Funkčnost zařízení, aplikace</td>
+                <td><%= review.criteria.functionality %></td>
+            </tr>
+            <tr>
+                <td>Typografická a jazyková úprava práce</td>
+                <td><%= review.criteria.typography %></td>
+            </tr>
+            <tr>
+                <td>Celkové hodnocení</td>
+                <td><%= review.criteria.evaluation %></td>
+            </tr>
+            <tr>
+                <td>Otázky oponenta</td>
+                <td><%= review.criteria.questions %></td>
+            </tr>
+            <tr>
+                <td>Navrhovaná známka:</td>
+                <td id="mark"><%= review.criteria.grade %></td>
+            </tr>
+        </table>
+        <p id="date">Datum: <%= review.date.getDate() + ". " + review.date.getMonth() + ". " + review.date.getFullYear() %></p>
+        <p id="signature">Podpis oponenta:</p>
+    </main>
+</body>
+</html>
