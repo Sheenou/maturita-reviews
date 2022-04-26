@@ -6,6 +6,11 @@ const reviewSchema = new mongoose.Schema({
         required: true
     },
 
+    "author": {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+
     "type": {
         type: String,
         required: true

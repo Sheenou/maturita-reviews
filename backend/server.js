@@ -28,6 +28,7 @@ app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 app.use(express.static("public"));
 app.use(express.urlencoded({ limit: "10mb", extended: false }));
+app.use(express.json({ limit: "10mb", extended: true }));
 
 // Routes
 app.use("/", indexRouter);

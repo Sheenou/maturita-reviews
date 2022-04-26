@@ -18,7 +18,7 @@ class UsersController {
             if(!await bcrypt.compare(body.password, userLogin.password)) throw new Error("Nesprávné heslo");
 
  
-            const token = jwt.sign({ _id: UserLogin._id }, process.env.TOKEN_SECRET);
+            const token = jwt.sign({ _id: userLogin._id }, process.env.TOKEN_SECRET);
 
             res.render("reviews", {
                 userId: userLogin.id,
